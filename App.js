@@ -19,7 +19,7 @@ export default function App() {
       <AppProvider>
           <NavigationContainer>
               <Stack.Navigator screenOptions={ {headerShown: false} }>
-                  <Stack.Screen name="HomeScreen" component={HomeScreen} options={ {title: "BlitzMind", statusBarColor: "#F7D0D0", navigationBarColor: "#F7D0D0"} }/>
+                  <Stack.Screen name="HomeScreen" component={HomeScreen} options={ {title: "BlitzMind"/*, statusBarColor: "#F7D0D0", navigationBarColor: "#F7D0D0"*/} }/>
                   <Stack.Screen name="ReflexGame" component={ReflexGameScreen} options={ {title: "Refleks Oyunu"} }/>
                   <Stack.Screen name="MemoryGame" component={MemoryGameScreen} options={ {title: "Hafıza Oyunu"} }/>
                   <Stack.Screen name="ArithmeticSpeedGame" component={ArithmeticSpeedGameScreen} options={ {title: "Aritmetik Hız"} }/>
