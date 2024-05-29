@@ -1,21 +1,41 @@
 import {
+    Alert,
     SafeAreaView,
     StyleSheet,
     Text,
     TouchableOpacity,
     View,
 } from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import Spacing from "../../constants/Spacing";
 import FontSize from "../../constants/FontSize";
 import Colors from "../../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import AppTextInput from "../../components/AppTextInput";
 import {useNavigation} from "@react-navigation/native";
+import {auth} from "../../../firebaseConfig";
 
 const LoginScreen = () => {
 
     const navigation = useNavigation();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleLogin = () => {
+        auth
+            .signInWithEmailAndPassword(email, password)
+            .then((userCredentials) => {
+                const user = userCredentials.user;
+                const userId = user.uid;
+                Alert.alert(
+                    "Giriş Başarılı.",
+                    "Başarılı bir biçimde giriş yaptınız.",
+                    [{ text: "Tamam", onPress: () => console.log("OK Pressed") }]
+                );
+                navigation.navigate("HomeScreen");
+            })
+            .catch((error) => alert(error.message));
+    }
 
     return (
         <SafeAreaView>
@@ -33,7 +53,6 @@ const LoginScreen = () => {
                         style={{
                             fontSize: FontSize.xLarge,
                             color: Colors.primary,
-                            //fontFamily: Font["poppins-bold"],
                             marginVertical: Spacing * 3,
                         }}
                     >
@@ -41,7 +60,6 @@ const LoginScreen = () => {
                     </Text>
                     <Text
                         style={{
-                            //fontFamily: Font["poppins-semiBold"],
                             fontSize: FontSize.large,
                             maxWidth: "60%",
                             textAlign: "center",
@@ -55,21 +73,8 @@ const LoginScreen = () => {
                         marginVertical: Spacing * 3,
                     }}
                 >
-                    <AppTextInput placeholder="Email" />
-                    <AppTextInput placeholder="Password" />
-                </View>
-
-                <View>
-                    <Text
-                        style={{
-                            //fontFamily: Font["poppins-semiBold"],
-                            fontSize: FontSize.small,
-                            color: Colors.primary,
-                            alignSelf: "flex-end",
-                        }}
-                    >
-                        Şifremi Unuttum
-                    </Text>
+                    <AppTextInput value={email} onChangeText={(text) => setEmail(text)} placeholder="Email" />
+                    <AppTextInput secureTextEntry={true} value={password} onChangeText={(text) => setPassword(text)} placeholder="Password" />
                 </View>
 
                 <TouchableOpacity
@@ -86,11 +91,10 @@ const LoginScreen = () => {
                         shadowOpacity: 0.3,
                         shadowRadius: Spacing,
                     }}
-                    onPress={() => navigation.navigate("HomeScreen")}
+                    onPress={() => handleLogin()}
                 >
                     <Text
                         style={{
-                            //fontFamily: Font["poppins-bold"],
                             color: Colors.onPrimary,
                             textAlign: "center",
                             fontSize: FontSize.large,
@@ -107,7 +111,6 @@ const LoginScreen = () => {
                 >
                     <Text
                         style={{
-                            //fontFamily: Font["poppins-semiBold"],
                             color: Colors.text,
                             textAlign: "center",
                             fontSize: FontSize.small,
@@ -124,7 +127,6 @@ const LoginScreen = () => {
                 >
                     <Text
                         style={{
-                            //fontFamily: Font["poppins-semiBold"],
                             color: Colors.primary,
                             textAlign: "center",
                             fontSize: FontSize.small,

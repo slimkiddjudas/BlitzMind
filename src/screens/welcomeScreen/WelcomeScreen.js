@@ -38,7 +38,6 @@ function WelcomeScreen() {
                         style={{
                             fontSize: FontSize.xxLarge,
                             color: Colors.primary,
-                            //fontFamily: Font["poppins-bold"],
                             textAlign: "center",
                         }}
                     >
@@ -49,7 +48,6 @@ function WelcomeScreen() {
                         style={{
                             fontSize: FontSize.small,
                             color: Colors.text,
-                            //fontFamily: Font["poppins-regular"],
                             textAlign: "center",
                             marginTop: Spacing * 2,
                         }}
@@ -84,7 +82,6 @@ function WelcomeScreen() {
                     >
                         <Text
                             style={{
-                                //fontFamily: Font["poppins-bold"],
                                 color: Colors.onPrimary,
                                 fontSize: FontSize.large,
                                 textAlign: "center",
@@ -104,7 +101,6 @@ function WelcomeScreen() {
                     >
                         <Text
                             style={{
-                                //fontFamily: Font["poppins-bold"],
                                 color: Colors.text,
                                 fontSize: FontSize.large,
                                 textAlign: "center",

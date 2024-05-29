@@ -1,4 +1,5 @@
 import {
+    Alert,
     SafeAreaView,
     StyleSheet,
     Text,
@@ -6,17 +7,43 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import Spacing from "../../constants/Spacing";
 import FontSize from "../../constants/FontSize";
 import Colors from "../../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
-import AppTextInput from "../../components/AppTextInput";
 import {useNavigation} from "@react-navigation/native";
+import {auth} from "../../../firebaseConfig";
+import AppTextInput from "../../components/AppTextInput";
 
 const RegisterScreen = () => {
 
     const navigation = useNavigation();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+    const handleRegister = () => {
+        if (password !== confirmPassword) {
+            alert("Passwords don't match");
+        }
+        else{
+            auth
+                .createUserWithEmailAndPassword(email, password)
+                .then((userCredentials) => {
+                    const user = userCredentials.user;
+                    const userId = user.uid;
+                    console.log("User", user.email);
+                    Alert.alert(
+                        "Kayıt Başarılı",
+                        "Başarılı bir biçimde kaydoldunuz.",
+                        [{ text: "Tamam", onPress: () => console.log("OK Pressed") }]
+                    );
+                    navigation.navigate("HomeScreen");
+                })
+                .catch((error) => alert(error.message));
+        }
+    }
 
     return (
         <SafeAreaView>
@@ -54,9 +81,9 @@ const RegisterScreen = () => {
                         marginVertical: Spacing * 3,
                     }}
                 >
-                    <AppTextInput placeholder="Email" />
-                    <AppTextInput placeholder="Password" />
-                    <AppTextInput placeholder="Confirm Password" />
+                    <AppTextInput value={email} onChangeText={(text) => setEmail(text)} placeholder="Email" />
+                    <AppTextInput secureTextEntry={true} value={password} onChangeText={(text) => setPassword(text)} placeholder="Password" />
+                    <AppTextInput secureTextEntry={true} value={confirmPassword} onChangeText={(text) => setConfirmPassword(text)} placeholder="Confirm Password" />
                 </View>
 
                 <TouchableOpacity
@@ -73,11 +100,10 @@ const RegisterScreen = () => {
                         shadowOpacity: 0.3,
                         shadowRadius: Spacing,
                     }}
-                    onPress={() => navigation.navigate("HomeScreen")}
+                    onPress={() => handleRegister()}
                 >
                     <Text
                         style={{
-                            //fontFamily: Font["poppins-bold"],
                             color: Colors.onPrimary,
                             textAlign: "center",
                             fontSize: FontSize.large,
@@ -94,7 +120,6 @@ const RegisterScreen = () => {
                 >
                     <Text
                         style={{
-                            //fontFamily: Font["poppins-semiBold"],
                             color: Colors.text,
                             textAlign: "center",
                             fontSize: FontSize.small,
@@ -111,7 +136,6 @@ const RegisterScreen = () => {
                 >
                     <Text
                         style={{
-                            //fontFamily: Font["poppins-semiBold"],
                             color: Colors.primary,
                             textAlign: "center",
                             fontSize: FontSize.small,

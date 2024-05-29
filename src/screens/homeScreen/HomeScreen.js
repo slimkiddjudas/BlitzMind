@@ -5,12 +5,15 @@ import Categories from "../../components/categories/Categories";
 import {ScreenWrapper} from "react-native-screen-wrapper";
 
 function HomeScreen() {
+
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
                 <Text style={styles.headerText}>BlitzMind</Text>
-                <TouchableOpacity style={styles.logoutButton}>
-                    <Text style={styles.logoutText}>Logout</Text>
+                <TouchableOpacity style={styles.logoutButton} onPress={() => navigation.navigate("WelcomeScreen")}>
+                    <Text style={styles.logoutText}>Çıkış Yap</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.banner}>
