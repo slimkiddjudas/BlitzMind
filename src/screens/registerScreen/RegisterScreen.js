@@ -34,21 +34,19 @@ const RegisterScreen = () => {
                         style={{
                             fontSize: FontSize.xLarge,
                             color: Colors.primary,
-                            //fontFamily: Font["poppins-bold"],
                             marginVertical: Spacing * 3,
                         }}
                     >
-                        Create account
+                        Hesap Oluştur
                     </Text>
                     <Text
                         style={{
-                            //fontFamily: Font["poppins-regular"],
                             fontSize: FontSize.small,
                             maxWidth: "80%",
                             textAlign: "center",
                         }}
                     >
-                        Create an account so you can explore all the existing jobs
+                        Birbirinden eğlenceli oyunlara erişebilmek için üye ol!
                     </Text>
                 </View>
                 <View
@@ -75,6 +73,7 @@ const RegisterScreen = () => {
                         shadowOpacity: 0.3,
                         shadowRadius: Spacing,
                     }}
+                    onPress={() => navigation.navigate("HomeScreen")}
                 >
                     <Text
                         style={{
@@ -84,7 +83,7 @@ const RegisterScreen = () => {
                             fontSize: FontSize.large,
                         }}
                     >
-                        Sign up
+                        Kayıt Ol
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -101,7 +100,7 @@ const RegisterScreen = () => {
                             fontSize: FontSize.small,
                         }}
                     >
-                        Already have an account
+                        Hesabın Var Mı?
                     </Text>
                 </TouchableOpacity>
 
@@ -118,7 +117,7 @@ const RegisterScreen = () => {
                             fontSize: FontSize.small,
                         }}
                     >
-                        Or continue with
+                        Veya Şununla Devam Et
                     </Text>
 
                     <View

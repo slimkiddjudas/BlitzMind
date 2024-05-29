@@ -42,7 +42,7 @@ function WelcomeScreen() {
                             textAlign: "center",
                         }}
                     >
-                        Discover Your Dream Job here
+                        BlitzMind
                     </Text>
 
                     <Text
@@ -54,8 +54,8 @@ function WelcomeScreen() {
                             marginTop: Spacing * 2,
                         }}
                     >
-                        Explore all the existing job roles based or your interest and study
-                        major
+                        Hafızanı, Refleksini ve Zekanı Ölçmeye Hazır mısın?
+                        Yıldırım Gibi!
                     </Text>
                 </View>
                 <View
@@ -90,11 +90,11 @@ function WelcomeScreen() {
                                 textAlign: "center",
                             }}
                         >
-                            Login
+                            Giriş Yap
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate("Register")}
+                        onPress={() => navigation.navigate("RegisterScreen")}
                         style={{
                             paddingVertical: Spacing * 1.5,
                             paddingHorizontal: Spacing * 2,
@@ -110,7 +110,7 @@ function WelcomeScreen() {
                                 textAlign: "center",
                             }}
                         >
-                            Register
+                            Kayıt Ol
                         </Text>
                     </TouchableOpacity>
                 </View>

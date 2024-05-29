@@ -37,7 +37,7 @@ const LoginScreen = () => {
                             marginVertical: Spacing * 3,
                         }}
                     >
-                        Login here
+                        Giriş Yap
                     </Text>
                     <Text
                         style={{
@@ -47,7 +47,7 @@ const LoginScreen = () => {
                             textAlign: "center",
                         }}
                     >
-                        Welcome back you've been missed!
+                        BlitzMind'a Hoşgeldin. Seni Özlemiştik Doğrusu!
                     </Text>
                 </View>
                 <View
@@ -68,7 +68,7 @@ const LoginScreen = () => {
                             alignSelf: "flex-end",
                         }}
                     >
-                        Forgot your password ?
+                        Şifremi Unuttum
                     </Text>
                 </View>
 
@@ -86,6 +86,7 @@ const LoginScreen = () => {
                         shadowOpacity: 0.3,
                         shadowRadius: Spacing,
                     }}
+                    onPress={() => navigation.navigate("HomeScreen")}
                 >
                     <Text
                         style={{
@@ -95,7 +96,7 @@ const LoginScreen = () => {
                             fontSize: FontSize.large,
                         }}
                     >
-                        Sign in
+                        Giriş Yap
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -112,7 +113,7 @@ const LoginScreen = () => {
                             fontSize: FontSize.small,
                         }}
                     >
-                        Create new account
+                        Yeni Hesap Oluştur
                     </Text>
                 </TouchableOpacity>
 
@@ -129,7 +130,7 @@ const LoginScreen = () => {
                             fontSize: FontSize.small,
                         }}
                     >
-                        Or continue with
+                        Veya Şununla Devam Et
                     </Text>
 
                     <View
