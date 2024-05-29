@@ -11,6 +11,9 @@ import EvenOddReflexGameScreen from "./src/screens/gameScreens/evenOddReflexGame
 import TicTacToeGameScreen from "./src/screens/gameScreens/ticTacToeGameScreen/TicTacToeGameScreen";
 import ReflexGameFinishScreen from "./src/screens/gameScreens/reflexGameScreen/ReflexGameFinishScreen";
 import {AppProvider} from "./src/context/AppContext";
+import LoginScreen from "./src/screens/loginScreen/LoginScreen";
+import WelcomeScreen from "./src/screens/welcomeScreen/WelcomeScreen";
+import RegisterScreen from "./src/screens/registerScreen/RegisterScreen";
 
 const Stack =createNativeStackNavigator();
 
@@ -19,6 +22,9 @@ export default function App() {
       <AppProvider>
           <NavigationContainer>
               <Stack.Navigator screenOptions={ {headerShown: false} }>
+                  <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} options={ {title: "Welcome"} } />
+                  <Stack.Screen name="LoginScreen" component={LoginScreen} options={ {title: "Login Screen"} } />
+                  <Stack.Screen name="RegisterScreen" component={RegisterScreen} options={ {title: "Register Screen"} } />
                   <Stack.Screen name="HomeScreen" component={HomeScreen} options={ {title: "BlitzMind"/*, statusBarColor: "#F7D0D0", navigationBarColor: "#F7D0D0"*/} }/>
                   <Stack.Screen name="ReflexGame" component={ReflexGameScreen} options={ {title: "Refleks Oyunu"} }/>
                   <Stack.Screen name="MemoryGame" component={MemoryGameScreen} options={ {title: "Hafıza Oyunu"} }/>
