@@ -19,7 +19,11 @@ function WelcomeScreen() {
     const navigation = useNavigation()
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+        }}>
             <View>
                 {/*<ImageBackground
                     style={{
@@ -61,6 +65,7 @@ function WelcomeScreen() {
                         paddingHorizontal: Spacing * 2,
                         paddingTop: Spacing * 6,
                         flexDirection: "row",
+                        gap: 8
                     }}
                 >
                     <TouchableOpacity
@@ -97,6 +102,8 @@ function WelcomeScreen() {
                             paddingHorizontal: Spacing * 2,
                             width: "48%",
                             borderRadius: Spacing,
+                            borderWidth: 1,
+                            borderColor: Colors.primary,
                         }}
                     >
                         <Text

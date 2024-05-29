@@ -14,6 +14,10 @@ import {AppProvider} from "./src/context/AppContext";
 import LoginScreen from "./src/screens/loginScreen/LoginScreen";
 import WelcomeScreen from "./src/screens/welcomeScreen/WelcomeScreen";
 import RegisterScreen from "./src/screens/registerScreen/RegisterScreen";
+import CatchTheBoxScoreBoardScreen
+    from "./src/screens/scoreBoardScreens/catchTheBoxScoreBoardScreen/CatchTheBoxScoreBoardScreen";
+import ReflexGameScoreBoardScreen
+    from "./src/screens/scoreBoardScreens/reflexGameScoreBoardScreen/ReflexGameScoreBoardScreen";
 
 const Stack =createNativeStackNavigator();
 
@@ -33,6 +37,8 @@ export default function App() {
                   <Stack.Screen name="EvenOddReflexGame" component={EvenOddReflexGameScreen} options={ {title: "Tek-Çift Refleks"} }/>
                   <Stack.Screen name="TicTacToeGame" component={TicTacToeGameScreen} options={ {title: "XOX Oyunu"} } />
                   <Stack.Screen name="ReflexGameFinish" component={ReflexGameFinishScreen} options={ {title: "Refleks Oyunu"} }/>
+                  <Stack.Screen name="CatchTheBoxScoreBoardScreen" component={CatchTheBoxScoreBoardScreen} options={ {title: "Catch The Box ScoreBoard"} } />
+                  <Stack.Screen name="ReflexGameScoreBoardScreen" component={ReflexGameScoreBoardScreen} options={ {title: "Reflex Game ScoreBoard"} } />
               </Stack.Navigator>
           </NavigationContainer>
       </AppProvider>

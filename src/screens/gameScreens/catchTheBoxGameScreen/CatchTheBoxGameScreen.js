@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import {firebase} from "../../../../firebaseConfig";
+import {useNavigation} from "@react-navigation/native";
 
 const CatchTheBoxGameScreen = () => {
     const [squarePosition, setSquarePosition] = useState({ x: 0, y: 0 });
     const [score, setScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const { width, height } = Dimensions.get('window'); // Ekranın genişliği ve yüksekliği
+    const userId = firebase.auth().currentUser.uid;
+    const navigation = useNavigation();
 
     useEffect(() => {
         const gameTimer = setTimeout(() => {
             setGameOver(true);
         }, 20000); // Oyun süresi 20 saniye olarak değiştirildi
-
         return () => clearTimeout(gameTimer);
     }, []);
 
@@ -22,7 +25,6 @@ const CatchTheBoxGameScreen = () => {
                 const randomY = Math.floor(Math.random() * (height - 100)); // Kare boyutu 100x100 olarak ayarlandı
                 setSquarePosition({ x: randomX, y: randomY });
             }, 1200); // Kare belirme gecikmesi 1.2 saniye olarak değiştirildi
-
             return () => clearInterval(squareInterval);
         }
     }, [width, height, gameOver]); // Genişlik, yükseklik ve gameOver bağımlılıkları eklendi
@@ -36,9 +38,10 @@ const CatchTheBoxGameScreen = () => {
         }
     };
 
-    const handleRestartGame = () => {
-        setScore(0);
-        setGameOver(false);
+    const handleRestartGame = async () => {
+        const scoreData = {userId: userId, score: score};
+        await firebase.firestore().collection('CatchTheBoxScoreBoard').add(scoreData).then()
+        navigation.navigate("HomeScreen")
     };
 
     return (
@@ -53,7 +56,7 @@ const CatchTheBoxGameScreen = () => {
                 <View>
                     <Text style={styles.gameOverText}>Oyun bitti!</Text>
                     <TouchableOpacity style={styles.restartButton} onPress={handleRestartGame}>
-                        <Text style={styles.restartButtonText}>Tekrar Oyna</Text>
+                        <Text style={styles.restartButtonText}>Ana Menüye Dön</Text>
                     </TouchableOpacity>
                 </View>
             )}

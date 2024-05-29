@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, Text, View, StyleSheet, TouchableOpacity, Image} from "react-native";
+import {Pressable, Text, View, StyleSheet, TouchableOpacity, Image, FlatList} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import Categories from "../../components/categories/Categories";
 import {ScreenWrapper} from "react-native-screen-wrapper";
@@ -7,6 +7,21 @@ import {ScreenWrapper} from "react-native-screen-wrapper";
 function HomeScreen() {
 
     const navigation = useNavigation();
+    const screens = [
+        {
+            screenId: 1,
+            screenName: "Catch The Box ScoreBoard",
+            component: "CatchTheBoxScoreBoardScreen",
+        },
+        {
+            screenId: 2,
+            screenName: "Reflex Game ScoreBoard",
+            component: "ReflexGameScoreBoardScreen",
+        }
+    ];
+    const handleRenderItem = (component) => {
+        navigation.navigate(component)
+    }
 
     return (
         <View style={styles.container}>
@@ -18,6 +33,9 @@ function HomeScreen() {
             </View>
             <View style={styles.banner}>
                 <Image source={require('../../../assets/deneme.jpg')} style={ {width: 250, height: 250} }/>
+                {screens.map((item) => (<TouchableOpacity key={item.screenId} onPress={() => handleRenderItem(item.component)}>
+                    <Text>{item.screenName}</Text>
+                </TouchableOpacity>))}
             </View>
             <Categories />
         </View>

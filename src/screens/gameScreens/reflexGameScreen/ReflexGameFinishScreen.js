@@ -2,13 +2,17 @@ import React, {useContext, useEffect} from 'react';
 import {Pressable, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import AppContext from "../../../context/AppContext";
+import {firebase} from "../../../../firebaseConfig";
 
 function ReflexGameFinishScreen() {
 
     const {backgroundColor, reactionTime} = useContext(AppContext)
     const navigation = useNavigation()
+    const userId = firebase.auth().currentUser.uid;
 
-    const restartGame = () => {
+    const restartGame = async () => {
+        const scoreData = {userId: userId, reactionTime: reactionTime};
+        await firebase.firestore().collection('ReflexGameScoreBoard').add(scoreData).then()
         navigation.navigate("HomeScreen")
     }
 
