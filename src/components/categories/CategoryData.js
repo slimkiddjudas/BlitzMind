@@ -21,8 +21,8 @@ export default categories = [
     },
     {
         categoryId: 5,
-        categoryName: "Tek-Çift Hafıza",
-        component: "EvenOddReflexGame"
+        categoryName: "Hızlı Yazma Testi",
+        component: "TypingSpeedGame"
     },
     {
         categoryId: 6,

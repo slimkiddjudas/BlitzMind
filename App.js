@@ -18,6 +18,7 @@ import CatchTheBoxScoreBoardScreen
     from "./src/screens/scoreBoardScreens/catchTheBoxScoreBoardScreen/CatchTheBoxScoreBoardScreen";
 import ReflexGameScoreBoardScreen
     from "./src/screens/scoreBoardScreens/reflexGameScoreBoardScreen/ReflexGameScoreBoardScreen";
+import TypingSpeedGameScreen from "./src/screens/gameScreens/typingSpeedGameScreen/TypingSpeedGameScreen";
 
 const Stack =createNativeStackNavigator();
 
@@ -39,6 +40,7 @@ export default function App() {
                   <Stack.Screen name="ReflexGameFinish" component={ReflexGameFinishScreen} options={ {title: "Refleks Oyunu"} }/>
                   <Stack.Screen name="CatchTheBoxScoreBoardScreen" component={CatchTheBoxScoreBoardScreen} options={ {title: "Catch The Box ScoreBoard"} } />
                   <Stack.Screen name="ReflexGameScoreBoardScreen" component={ReflexGameScoreBoardScreen} options={ {title: "Reflex Game ScoreBoard"} } />
+                  <Stack.Screen name="TypingSpeedGame" component={TypingSpeedGameScreen} options={ {title: "Typing Speed Game"} } />
               </Stack.Navigator>
           </NavigationContainer>
       </AppProvider>
