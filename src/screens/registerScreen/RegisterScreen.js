@@ -1,5 +1,6 @@
 import {
     Alert,
+    KeyboardAvoidingView,
     SafeAreaView,
     StyleSheet,
     Text,
@@ -13,7 +14,7 @@ import FontSize from "../../constants/FontSize";
 import Colors from "../../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
-import {auth} from "../../../firebaseConfig";
+import {auth, firebase} from "../../../firebaseConfig";
 import AppTextInput from "../../components/AppTextInput";
 
 const RegisterScreen = () => {
@@ -21,6 +22,8 @@ const RegisterScreen = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
     const handleRegister = () => {
@@ -28,7 +31,14 @@ const RegisterScreen = () => {
             alert("Passwords don't match");
         }
         else{
-            auth
+            signUp(email, password, firstName, lastName)
+            Alert.alert(
+                "Kayıt Başarılı",
+                "Başarılı bir biçimde kaydoldunuz.",
+                [{ text: "Tamam", onPress: () => console.log("OK Pressed") }]
+            )
+            navigation.navigate("HomeScreen");
+            /*auth
                 .createUserWithEmailAndPassword(email, password)
                 .then((userCredentials) => {
                     const user = userCredentials.user;
@@ -41,7 +51,7 @@ const RegisterScreen = () => {
                     );
                     navigation.navigate("HomeScreen");
                 })
-                .catch((error) => alert(error.message));
+                .catch((error) => alert(error.message));*/
         }
     }
 
@@ -81,6 +91,8 @@ const RegisterScreen = () => {
                         marginVertical: Spacing * 3,
                     }}
                 >
+                    <AppTextInput value={firstName} onChangeText={(text) => setFirstName(text)} placeholder="İsim" />
+                    <AppTextInput value={lastName} onChangeText={(text) => setLastName(text)} placeholder="Soyisim" />
                     <AppTextInput value={email} onChangeText={(text) => setEmail(text)} placeholder="Email" />
                     <AppTextInput secureTextEntry={true} value={password} onChangeText={(text) => setPassword(text)} placeholder="Password" />
                     <AppTextInput secureTextEntry={true} value={confirmPassword} onChangeText={(text) => setConfirmPassword(text)} placeholder="Confirm Password" />
@@ -198,6 +210,33 @@ const RegisterScreen = () => {
             </View>
         </SafeAreaView>
     );
+};
+
+const signUp = async (email, password, firstName, lastName) => {
+    try {
+        // Kullanıcıyı Firebase Authentication ile kaydet
+        const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+
+        // Firestore'da kullanıcı bilgilerini sakla
+        await firebase.firestore().collection('users').doc(user.uid).set({
+            firstName: firstName,
+            lastName: lastName,
+            email: email
+        });
+
+        console.log('User account created & signed in!');
+    } catch (error) {
+        if (error.code === 'auth/email-already-in-use') {
+            console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+            console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+    }
 };
 
 export default RegisterScreen;

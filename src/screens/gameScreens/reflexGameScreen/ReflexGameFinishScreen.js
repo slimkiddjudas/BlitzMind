@@ -11,9 +11,19 @@ function ReflexGameFinishScreen() {
     const userId = firebase.auth().currentUser.uid;
 
     const restartGame = async () => {
-        const scoreData = {userId: userId, reactionTime: reactionTime};
-        await firebase.firestore().collection('ReflexGameScoreBoard').add(scoreData).then()
-        navigation.navigate("HomeScreen")
+        const scoreRef = firebase.firestore().collection('ReflexGameScoreBoard').doc(userId);
+        const doc = await scoreRef.get();
+
+        if (doc.exists) {
+            const existingReactionTime = doc.data().reactionTime;
+            if (reactionTime < existingReactionTime) {
+                await scoreRef.update({ reactionTime: reactionTime });
+            }
+        } else {
+            await scoreRef.set({ userId: userId, reactionTime: reactionTime });
+        }
+
+        navigation.navigate("HomeScreen");
     }
 
     return (

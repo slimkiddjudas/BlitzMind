@@ -39,9 +39,19 @@ const CatchTheBoxGameScreen = () => {
     };
 
     const handleRestartGame = async () => {
-        const scoreData = {userId: userId, score: score};
-        await firebase.firestore().collection('CatchTheBoxScoreBoard').add(scoreData).then()
-        navigation.navigate("HomeScreen")
+        const scoreRef = firebase.firestore().collection('CatchTheBoxScoreBoard').doc(userId);
+        const doc = await scoreRef.get();
+
+        if (doc.exists) {
+            const existingScore = doc.data().score;
+            if (score > existingScore) {
+                await scoreRef.update({ score: score });
+            }
+        } else {
+            await scoreRef.set({ userId: userId, score: score });
+        }
+
+        navigation.navigate("HomeScreen");
     };
 
     return (

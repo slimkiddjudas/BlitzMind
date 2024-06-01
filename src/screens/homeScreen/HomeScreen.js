@@ -3,6 +3,7 @@ import {Pressable, Text, View, StyleSheet, TouchableOpacity, Image, FlatList} fr
 import {useNavigation} from "@react-navigation/native";
 import Categories from "../../components/categories/Categories";
 import {ScreenWrapper} from "react-native-screen-wrapper";
+import {firebase} from "../../../firebaseConfig";
 
 function HomeScreen() {
 
@@ -19,15 +20,25 @@ function HomeScreen() {
             component: "ReflexGameScoreBoardScreen",
         }
     ];
+
     const handleRenderItem = (component) => {
         navigation.navigate(component)
+    }
+
+    const handleLogout = async () => {
+        try {
+            await firebase.auth().signOut();
+            navigation.navigate("WelcomeScreen");
+        } catch (error) {
+            console.error("Çıkış yaparken bir hata oluştu:", error);
+        }
     }
 
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
                 <Text style={styles.headerText}>BlitzMind</Text>
-                <TouchableOpacity style={styles.logoutButton} onPress={() => navigation.navigate("WelcomeScreen")}>
+                <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
                     <Text style={styles.logoutText}>Çıkış Yap</Text>
                 </TouchableOpacity>
             </View>
