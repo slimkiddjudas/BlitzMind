@@ -1,46 +1,75 @@
 import React from 'react';
-import {FlatList, StyleSheet, Text, Touchable, TouchableOpacity, View} from "react-native";
-import CategoryHeader from "./CategoryHeader";
-import categories from "./CategoryData";
-import {useNavigation} from "@react-navigation/native";
-import CategoryItem from "./CategoryItem";
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import categories from './CategoryData';
+import Colors from "../../constants/Colors";
 
 function Categories() {
-
-    const navigation = useNavigation()
+    const navigation = useNavigation();
 
     const handleOnPress = (component) => {
-        navigation.navigate(component)
-    }
+        navigation.navigate(component);
+    };
 
-    const renderItem = ({item}) => (
-        <View>
-            <TouchableOpacity activeOpacity={.1} onPress={() => handleOnPress(item?.component)}>
-                <CategoryItem name={item.categoryName} />
-            </TouchableOpacity>
-        </View>
-    )
+    const renderItem = ({ item }) => (
+        <TouchableOpacity
+            style={styles.categoryButton}
+            activeOpacity={0.7}
+            onPress={() => handleOnPress(item?.component)}
+        >
+            <Text style={styles.categoryText}>{item.categoryName}</Text>
+        </TouchableOpacity>
+    );
 
     return (
         <View style={styles.container}>
-            <CategoryHeader name="Oyunlar"/>
+            <Text style={styles.header}>Oyunlar</Text>
             <FlatList
-                horizontal={false}
-                numColumns={2}
-                keyExtractor={(item) => item.categoryId}
                 data={categories}
                 renderItem={renderItem}
+                keyExtractor={(item) => item.categoryId}
+                numColumns={2}
+                contentContainerStyle={styles.listContent}
             />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container : {
+    container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-    }
-})
+        width: '100%',
+        padding: 20,
+    },
+    header: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        color: Colors.accent,
+        marginBottom: 15,
+        textAlign: 'center',
+    },
+    listContent: {
+        alignItems: 'center',
+    },
+    categoryButton: {
+        backgroundColor: Colors.primary,
+        borderRadius: 15,
+        margin: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '45%',
+        padding: 20,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        elevation: 5,
+    },
+    categoryText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: Colors.textPrimary,
+    },
+});
 
 export default Categories;

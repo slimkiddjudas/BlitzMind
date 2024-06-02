@@ -26,7 +26,7 @@ const copyArray = (original) => {
 export default function TicTacToeGameScreen() {
     const [map, setMap] = useState(emptyMap);
     const [currentTurn, setCurrentTurn] = useState("x");
-    const [gameMode, setGameMode] = useState("BOT_MEDIUM"); // LOCAL, BOT_EASY, BOT_MEDIUM;
+    const [gameMode, setGameMode] = useState("BOT_MEDIUM");
 
     useEffect(() => {
         if (currentTurn === "o" && gameMode !== "LOCAL") {
@@ -45,7 +45,7 @@ export default function TicTacToeGameScreen() {
 
     const onPress = (rowIndex, columnIndex) => {
         if (map[rowIndex][columnIndex] !== "") {
-            Alert.alert("Position already occupied");
+            Alert.alert("Bu kare zaten alınmış.");
             return;
         }
 
@@ -59,7 +59,6 @@ export default function TicTacToeGameScreen() {
     };
 
     const getWinner = (winnerMap) => {
-        // Check rows
         for (let i = 0; i < 3; i++) {
             const isRowXWinning = winnerMap[i].every((cell) => cell === "x");
             const isRowOWinning = winnerMap[i].every((cell) => cell === "o");
@@ -72,7 +71,6 @@ export default function TicTacToeGameScreen() {
             }
         }
 
-        // Check columns
         for (let col = 0; col < 3; col++) {
             let isColumnXWinner = true;
             let isColumnOWinner = true;
@@ -94,7 +92,6 @@ export default function TicTacToeGameScreen() {
             }
         }
 
-        // check diagonals
         let isDiagonal1OWinning = true;
         let isDiagonal1XWinning = true;
         let isDiagonal2OWinning = true;
@@ -125,9 +122,9 @@ export default function TicTacToeGameScreen() {
 
     const checkTieState = () => {
         if (!map.some((row) => row.some((cell) => cell === ""))) {
-            Alert.alert(`It's a tie`, `tie`, [
+            Alert.alert(`Berabere!`, `tie`, [
                 {
-                    text: "Restart",
+                    text: "Yeniden Başla",
                     onPress: resetGame,
                 },
             ]);
@@ -135,9 +132,9 @@ export default function TicTacToeGameScreen() {
     };
 
     const gameWon = (player) => {
-        Alert.alert(`Huraaay`, `Player ${player} won`, [
+        Alert.alert(`İşte buuuu!`, `${player} kazandı!`, [
             {
-                text: "Restart",
+                text: "Yeniden Başla",
                 onPress: resetGame,
             },
         ]);
@@ -153,7 +150,6 @@ export default function TicTacToeGameScreen() {
     };
 
     const botTurn = () => {
-        // collect all possible options
         const possiblePositions = [];
         map.forEach((row, rowIndex) => {
             row.forEach((cell, columnIndex) => {

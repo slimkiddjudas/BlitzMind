@@ -1,18 +1,10 @@
-const white = "#fff";
-const black = "#000";
-const dark = "#626262";
-const blue = "#1F41BB";
-const gray = "#ECECEC";
-const lightBlue = "#f1f4ff";
-
-export default {
-    darkText: dark,
-    text: black,
-    background: white,
-    primary: blue,
-    onPrimary: white,
-    active: blue,
-    borderWithOpacity: "#1f41bb",
-    lightPrimary: lightBlue,
-    gray: gray,
+const Colors = {
+    background: '#1e1e1e',
+    primary: '#ff6347', // Tomato
+    secondary: '#4b0082', // Indigo
+    accent: '#ffdb58', // Mustard
+    textPrimary: '#ffffff', // White
+    textSecondary: '#b0c4de', // LightSteelBlue
 };
+
+export default Colors;

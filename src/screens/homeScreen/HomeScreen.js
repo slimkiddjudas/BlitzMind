@@ -1,29 +1,21 @@
 import React from 'react';
-import {Pressable, Text, View, StyleSheet, TouchableOpacity, Image, FlatList} from "react-native";
-import {useNavigation} from "@react-navigation/native";
-import Categories from "../../components/categories/Categories";
-import {ScreenWrapper} from "react-native-screen-wrapper";
-import {firebase} from "../../../firebaseConfig";
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { firebase } from '../../../firebaseConfig';
+import Colors from "../../constants/Colors";
+import Categories from '../../components/categories/Categories';
 
 function HomeScreen() {
-
     const navigation = useNavigation();
+
     const screens = [
-        {
-            screenId: 1,
-            screenName: "Catch The Box ScoreBoard",
-            component: "CatchTheBoxScoreBoardScreen",
-        },
-        {
-            screenId: 2,
-            screenName: "Reflex Game ScoreBoard",
-            component: "ReflexGameScoreBoardScreen",
-        }
+        { screenId: 1, screenName: "Catch The Box ScoreBoard", component: "CatchTheBoxScoreBoardScreen" },
+        { screenId: 2, screenName: "Reflex Game ScoreBoard", component: "ReflexGameScoreBoardScreen" }
     ];
 
     const handleRenderItem = (component) => {
-        navigation.navigate(component)
-    }
+        navigation.navigate(component);
+    };
 
     const handleLogout = async () => {
         try {
@@ -32,63 +24,100 @@ function HomeScreen() {
         } catch (error) {
             console.error("Çıkış yaparken bir hata oluştu:", error);
         }
-    }
+    };
+
+    const data = [
+        { key: 'header' },
+        ...screens
+    ];
+
+    const renderItem = ({ item }) => {
+        if (item.key === 'header') {
+            return (
+                <>
+                    <View style={styles.headerContainer}>
+                        <Text style={styles.headerText}>BlitzMind</Text>
+                        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+                            <Text style={styles.logoutButtonText}>Çıkış Yap</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <Categories />
+                    <Text style={styles.sectionTitle}>Skor Tabloları</Text>
+                </>
+            );
+        } else {
+            return (
+                <TouchableOpacity
+                    style={styles.scoreButton}
+                    onPress={() => handleRenderItem(item.component)}
+                >
+                    <Text style={styles.scoreButtonText}>{item.screenName}</Text>
+                </TouchableOpacity>
+            );
+        }
+    };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.headerContainer}>
-                <Text style={styles.headerText}>BlitzMind</Text>
-                <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-                    <Text style={styles.logoutText}>Çıkış Yap</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.banner}>
-                <Image source={require('../../../assets/deneme.jpg')} style={ {width: 250, height: 250} }/>
-                {screens.map((item) => (<TouchableOpacity key={item.screenId} onPress={() => handleRenderItem(item.component)}>
-                    <Text>{item.screenName}</Text>
-                </TouchableOpacity>))}
-            </View>
-            <Categories />
-        </View>
+        <FlatList
+            data={data}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index.toString()}
+            contentContainerStyle={styles.container}
+        />
     );
 }
 
-export default HomeScreen;
-
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: "center",
-        backgroundColor: '#ffffff',
-        paddingTop: 15
+        flexGrow: 1,
+        backgroundColor: Colors.background,
+        paddingHorizontal: 20,
+        paddingBottom: 20,
     },
     headerContainer: {
-        backgroundColor: '#ffffff',
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: 5
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 20,
+        paddingTop: 20,
     },
     headerText: {
-        color: '#000000',
-        fontWeight: "bold",
-        fontSize: 40
+        fontSize: 28,
+        fontWeight: 'bold',
+        color: Colors.accent,
     },
     logoutButton: {
-        padding: 7,
-        margin: 7,
-        backgroundColor: "white",
-        borderRadius: 5
+        backgroundColor: Colors.secondary,
+        padding: 10,
+        borderRadius: 5,
     },
-    logoutText: {
-        fontSize: 20
+    logoutButtonText: {
+        color: Colors.textPrimary,
+        fontSize: 16,
+        fontWeight: 'bold',
     },
-    banner: {
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 20,
-        backgroundColor: "#7ac4ff",
-        borderRadius: 15,
-        marginHorizontal: 5
-    }
-})
+    sectionTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: Colors.accent,
+        marginVertical: 10,
+        textAlign: 'center',
+    },
+    scoreButton: {
+        backgroundColor: Colors.secondary,
+        paddingVertical: 15,
+        paddingHorizontal: 25,
+        borderRadius: 10,
+        marginVertical: 5,
+        width: '80%',
+        alignItems: 'center',
+        alignSelf: 'center',
+    },
+    scoreButtonText: {
+        color: Colors.textPrimary,
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+});
+
+export default HomeScreen;
