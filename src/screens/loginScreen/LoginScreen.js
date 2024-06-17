@@ -1,6 +1,6 @@
 import {
     Alert,
-    SafeAreaView,
+    ScrollView,
     StyleSheet,
     Text,
     TouchableOpacity,
@@ -10,7 +10,6 @@ import React, {useState} from "react";
 import Spacing from "../../constants/Spacing";
 import FontSize from "../../constants/FontSize";
 import Colors from "../../constants/Colors";
-import { Ionicons } from "@expo/vector-icons";
 import AppTextInput from "../../components/AppTextInput";
 import {useNavigation} from "@react-navigation/native";
 import {auth} from "../../../firebaseConfig";
@@ -38,7 +37,7 @@ const LoginScreen = () => {
     }
 
     return (
-        <SafeAreaView>
+        <ScrollView>
             <View
                 style={{
                     padding: Spacing * 2,
@@ -120,7 +119,7 @@ const LoginScreen = () => {
                     </Text>
                 </TouchableOpacity>
             </View>
-        </SafeAreaView>
+        </ScrollView>
     );
 };
 

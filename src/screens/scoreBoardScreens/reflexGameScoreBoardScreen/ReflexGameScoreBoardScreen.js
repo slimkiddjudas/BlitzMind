@@ -53,7 +53,7 @@ function ReflexGameScoreBoardScreen() {
             <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('HomeScreen')}>
                 <Text style={styles.backButtonText}>{"< Geri"}</Text>
             </TouchableOpacity>
-            <Text style={styles.headerText}>Reflex Game Scoreboard</Text>
+            <Text style={styles.headerText}>Reflex Oyunu Skorboard</Text>
             <ScrollView contentContainerStyle={styles.scoreBoard}>
                 {scoreBoard.map((score, index) => (
                     <View key={index} style={styles.scoreCard}>

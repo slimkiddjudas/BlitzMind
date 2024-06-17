@@ -53,7 +53,7 @@ function CatchTheBoxScoreBoardScreen() {
             <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('HomeScreen')}>
                 <Text style={styles.backButtonText}>{"< Geri"}</Text>
             </TouchableOpacity>
-            <Text style={styles.headerText}>Catch The Box Scoreboard</Text>
+            <Text style={styles.headerText}>Kutuyu Yakala Skorboard</Text>
             <ScrollView contentContainerStyle={styles.scoreBoard}>
                 {scoreBoard.map((score, index) => (
                     <View key={index} style={styles.scoreCard}>
@@ -82,27 +82,27 @@ const styles = StyleSheet.create({
     },
     backButton: {
         position: 'absolute',
-        top: 20,
+        top: 30,
         left: 20,
         padding: 10,
         backgroundColor: '#E74C3C',
-        borderRadius: 10,
+        borderRadius: 12,
     },
     backButtonText: {
         color: '#fff',
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: 'bold',
     },
     headerText: {
         fontSize: 28,
         fontWeight: 'bold',
         textAlign: 'center',
-        marginVertical: 20,
+        marginVertical: 23,
         color: '#ECF0F1',
     },
     scoreBoard: {
         alignItems: 'center',
-        paddingVertical: 20,
+        paddingVertical: 12,
         flexGrow: 1,
         justifyContent: 'center',
     },
@@ -112,9 +112,9 @@ const styles = StyleSheet.create({
         padding: 20,
         marginVertical: 10,
         borderRadius: 15,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 0.3,
+        shadowColor: '#000000',
+        shadowOffset: { width: 5, height: 3 },
+        shadowOpacity: 0.4,
         shadowRadius: 5,
         elevation: 6,
         flexDirection: 'row',
@@ -131,7 +131,8 @@ const styles = StyleSheet.create({
         color: '#F1C40F',
     },
     playButton: {
-        marginTop: 20,
+        marginTop: 15,
+        marginBottom: 15,
         padding: 15,
         backgroundColor: '#E74C3C',
         borderRadius: 10,

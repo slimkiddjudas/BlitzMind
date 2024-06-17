@@ -1,10 +1,8 @@
 import {
     Alert,
     KeyboardAvoidingView,
-    SafeAreaView,
-    StyleSheet,
+    ScrollView,
     Text,
-    TextInput,
     TouchableOpacity,
     View,
 } from "react-native";
@@ -12,9 +10,8 @@ import React, {useState} from "react";
 import Spacing from "../../constants/Spacing";
 import FontSize from "../../constants/FontSize";
 import Colors from "../../constants/Colors";
-import { Ionicons } from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
-import {auth, firebase} from "../../../firebaseConfig";
+import {firebase} from "../../../firebaseConfig";
 import AppTextInput from "../../components/AppTextInput";
 
 const RegisterScreen = () => {
@@ -38,25 +35,11 @@ const RegisterScreen = () => {
                 [{ text: "Tamam", onPress: () => console.log("OK Pressed") }]
             )
             navigation.navigate("HomeScreen");
-            /*auth
-                .createUserWithEmailAndPassword(email, password)
-                .then((userCredentials) => {
-                    const user = userCredentials.user;
-                    const userId = user.uid;
-                    console.log("User", user.email);
-                    Alert.alert(
-                        "Kayıt Başarılı",
-                        "Başarılı bir biçimde kaydoldunuz.",
-                        [{ text: "Tamam", onPress: () => console.log("OK Pressed") }]
-                    );
-                    navigation.navigate("HomeScreen");
-                })
-                .catch((error) => alert(error.message));*/
         }
     }
 
     return (
-        <SafeAreaView>
+        <ScrollView>
             <View
                 style={{
                     padding: Spacing * 2,
@@ -86,7 +69,7 @@ const RegisterScreen = () => {
                         Birbirinden eğlenceli oyunlara erişebilmek için üye ol!
                     </Text>
                 </View>
-                <View
+                <KeyboardAvoidingView
                     style={{
                         marginVertical: Spacing * 3,
                     }}
@@ -96,7 +79,7 @@ const RegisterScreen = () => {
                     <AppTextInput value={email} onChangeText={(text) => setEmail(text)} placeholder="Email" />
                     <AppTextInput secureTextEntry={true} value={password} onChangeText={(text) => setPassword(text)} placeholder="Password" />
                     <AppTextInput secureTextEntry={true} value={confirmPassword} onChangeText={(text) => setConfirmPassword(text)} placeholder="Confirm Password" />
-                </View>
+                </KeyboardAvoidingView>
 
                 <TouchableOpacity
                     style={{
@@ -141,7 +124,7 @@ const RegisterScreen = () => {
                     </Text>
                 </TouchableOpacity>
             </View>
-        </SafeAreaView>
+        </ScrollView>
     );
 };
 

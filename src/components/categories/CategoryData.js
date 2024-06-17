@@ -22,7 +22,7 @@ export default categories = [
     {
         categoryId: 5,
         categoryName: "Tek-Çift Reflex",
-        component: "EvenOddReflexGame"
+        component: "TypingSpeedGame"
     },
     {
         categoryId: 6,

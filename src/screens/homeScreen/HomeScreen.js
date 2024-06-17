@@ -9,8 +9,8 @@ function HomeScreen() {
     const navigation = useNavigation();
 
     const screens = [
-        { screenId: 1, screenName: "Catch The Box ScoreBoard", component: "CatchTheBoxScoreBoardScreen" },
-        { screenId: 2, screenName: "Reflex Game ScoreBoard", component: "ReflexGameScoreBoardScreen" }
+        { screenId: 1, screenName: "Kutuyu Yakala Skorboard", component: "CatchTheBoxScoreBoardScreen" },
+        { screenId: 2, screenName: "Refleks Oyunu Skorboard", component: "ReflexGameScoreBoardScreen" }
     ];
 
     const handleRenderItem = (component) => {
